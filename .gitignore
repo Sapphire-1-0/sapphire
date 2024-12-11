@@ -33,6 +33,7 @@ build/
 
 ### Saphire Service ### these are ignored as they have their own git repo
 services
+logs
 
 ### VS Code ###
 .vscode/

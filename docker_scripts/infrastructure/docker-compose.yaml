@@ -1,0 +1,13 @@
+services:
+  zipkin:
+    container_name: zipkin
+    image: openzipkin/zipkin
+    restart: always
+    ports:
+      - 9411:9411
+    networks:
+      - sapphire-net
+networks:
+  sapphire-net:
+    name: sapphire-net
+    driver: bridge
