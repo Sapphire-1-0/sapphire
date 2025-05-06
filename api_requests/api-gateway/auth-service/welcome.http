@@ -1,0 +1,6 @@
+# Base URL for api gateway
+@baseUrl = http://localhost:7092
+### GET request check the connection with the auth service
+GET {{baseUrl}}/api/v1/sapphire/auth/public/welcome
+
+###

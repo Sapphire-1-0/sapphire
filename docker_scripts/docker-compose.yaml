@@ -1,0 +1,87 @@
+services:
+  config-server:
+    build:
+      context: ../services/config-server
+    image: vbalaji215/sapphire/config-server:latest
+    container_name: config-server
+    ports:
+      - "7090:7090"
+    env_file:
+      - config-server.env
+    networks:
+      - sapphire-net
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:7090/actuator/health" ]
+      interval: 10s
+      retries: 5
+      start_period: 30s
+      timeout: 5s
+  discovery-server:
+    build:
+      context: ../services/discovery-server
+    image: vbalaji215/sapphire/discovery-server:latest
+    container_name: discovery-server
+    ports:
+      - "7091:7091"  # updated port
+    env_file:
+      - discovery-server.env
+    depends_on:
+      config-server:
+        condition: service_healthy
+    networks:
+      - sapphire-net
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:7091/actuator/health" ]
+      interval: 10s
+      retries: 5
+      start_period: 30s
+      timeout: 5s
+  api-gateway:
+    build:
+      context: ../services/api-gateway
+    image: vbalaji215/sapphire/api-gateway:latest
+    container_name: api-gateway
+    ports:
+      - "7092:7092"  # updated port
+    env_file:
+      - api-gateway.env
+    depends_on:
+      config-server:
+        condition: service_healthy
+      discovery-server:
+        condition: service_healthy
+    networks:
+      - sapphire-net
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:7092/actuator/health" ]
+      interval: 10s
+      retries: 5
+      start_period: 30s
+      timeout: 5s
+#  auth-service:
+#    build:
+#      context: ../services/auth-service
+#    image: vbalaji215/sapphire/auth-service:latest
+#    container_name: auth-service
+#    ports:
+#      - "7093:7093"  # updated port
+#    env_file:
+#      - auth-service.env
+#    depends_on:
+#      config-server:
+#        condition: service_healthy
+#      discovery-server:
+#        condition: service_healthy
+#      api-gateway:
+#        condition: service_healthy
+#    networks:
+#      - sapphire-net
+#    healthcheck:
+#      test: [ "CMD", "curl", "-f", "http://localhost:7093/actuator/health" ]
+#      interval: 10s
+#      retries: 5
+#      start_period: 30s
+#      timeout: 5s
+networks:
+  sapphire-net:
+    external: true

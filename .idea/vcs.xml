@@ -2,6 +2,14 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/services/account-management" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/services/api-gateway" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/services/auth-service" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/services/brihaspathee-unit-test" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/services/config-server" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/services/discovery-server" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/services/member-management" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/services/premium-billing" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/services/sapphire-library" vcs="Git" />
   </component>
 </project>

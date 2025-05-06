@@ -10,6 +10,9 @@
         <option value="$PROJECT_DIR$/services/member-management/pom.xml" />
         <option value="$PROJECT_DIR$/services/premium-billing/pom.xml" />
         <option value="$PROJECT_DIR$/services/api-gateway/pom.xml" />
+        <option value="$PROJECT_DIR$/services/auth-service/pom.xml" />
+        <option value="$PROJECT_DIR$/services/brihaspathee-unit-test/pom.xml" />
+        <option value="$PROJECT_DIR$/services/account-management/pom.xml" />
       </list>
     </option>
   </component>

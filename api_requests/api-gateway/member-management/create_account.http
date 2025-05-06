@@ -1,0 +1,146 @@
+# Base URL for patient API
+@baseUrl = http://localhost:7092
+
+### Step 1: Get Auth Token
+POST {{baseUrl}}/api/v1/sapphire/auth/public/authenticate
+Content-Type: application/json
+
+{
+  "username":"john",
+  "password": "password"
+}
+
+> {%
+    const token = response.body.response.accessToken;
+    client.global.set("accessToken", token);
+    console.log("Access token set:", token);
+%}
+
+### Step 2: POST request to create an account
+POST {{baseUrl}}/api/v1/sapphire/mms/secured/account/create
+Authorization: Bearer {{accessToken}}
+Content-Type: application/json
+
+{
+    "accountNumber": "FGDSFDHD46DF",
+    "lineOfBusiness": "MARKETPLACE",
+    "memberDtos":[
+        {
+            "memberCode": "HDRGDSFG35",
+            "lastName": "Varadharajan",
+            "firstName": "Balaji",
+            "middleName": "V",
+            "dateOfBirth": "1983-05-21",
+            "addressDtos": [
+                {
+                    "addressCode": "GSDGHFGJD34",
+                    "addressType": "RESIDENTIAL",
+                    "addressLine1": "13377 Batten Lane",
+                    "city": "Odessa",
+                    "state": "Florida",
+                    "zipCode": "33556",
+                    "startDate": "2020-01-01"
+                },
+                {
+                    "addressCode": "GSDGHFGJD35",
+                    "addressType": "Mailing",
+                    "addressLine1": "P.O. Box 35553",
+                    "city": "Odessa",
+                    "state": "Florida",
+                    "zipCode": "33556",
+                    "startDate": "2020-01-01"
+                }
+            ]
+        },
+        {
+            "memberCode": "HDRGDSFG36",
+            "lastName": "Mohanakrishnan",
+            "firstName": "Pooja",
+            "dateOfBirth": "1985-12-10",
+            "addressDtos": [
+                {
+                    "addressCode": "GSDGHFGJD34",
+                    "addressType": "RESIDENTIAL",
+                    "addressLine1": "13377 Batten Lane",
+                    "city": "Odessa",
+                    "state": "Florida",
+                    "zipCode": "33556",
+                    "startDate": "2020-01-01"
+                },
+                {
+                    "addressCode": "GSDGHFGJD35",
+                    "addressType": "Mailing",
+                    "addressLine1": "P.O. Box 35553",
+                    "city": "Odessa",
+                    "state": "Florida",
+                    "zipCode": "33556",
+                    "startDate": "2020-01-01"
+                }
+            ]
+        }
+    ],
+    "enrollmentSpanDtos":[
+        {
+            "enrollmentSpanCode": "BSDGSEBG353",
+            "businessUnit": "FL",
+            "spanStatus": "PREMEMBER",
+            "startDate": "2025-01-01",
+            "endDate": "9999-12-31",
+            "planId": "932543FL53563",
+            "groupPolicyId": "55274255",
+            "premiumSpans": [
+                {
+                    "premiumSpanCode": "KFDDRHDRH0001",
+                    "startDate": "2025-01-01",
+                    "endDate": "2025-06-30",
+                    "premiumAmountTotal": 100.00,
+                    "totalResponsibleAmount": 100.00,
+                    "aptcAmount": 0.00,
+                    "csrAmount": 10.00,
+                    "otherPayAmount": 0.00,
+                    "memberPremiumDtos":[
+                        {
+                            "memberCode": "HDRGDSFG35",
+                            "premiumAmount": 50.00,
+                            "exchangeMemberId": "423535301"
+                        },
+                        {
+                            "memberCode": "HDRGDSFG36",
+                            "premiumAmount": 50.00,
+                            "exchangeMemberId": "423535302"
+                        }
+                    ]
+                },
+                {
+                    "premiumSpanCode": "KFDDRHDRH0002",
+                    "startDate": "2025-07-01",
+                    "endDate": "2025-12-31",
+                    "premiumAmountTotal": 100.00,
+                    "totalResponsibleAmount": 50.00,
+                    "aptcAmount": 50.00,
+                    "csrAmount": 10.00,
+                    "otherPayAmount": 0.00,
+                    "memberPremiumDtos":[
+                        {
+                            "memberCode": "HDRGDSFG35",
+                            "premiumAmount": 50.00,
+                            "exchangeMemberId": "423535301"
+                        },
+                        {
+                            "memberCode": "HDRGDSFG36",
+                            "premiumAmount": 50.00,
+                            "exchangeMemberId": "423535302"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
+
+> {%
+    const apiResponse = response.body;
+    console.log("API Response:", apiResponse);
+%}
+
+###

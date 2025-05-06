@@ -1,0 +1,13 @@
+# Base URL for patient API
+@baseUrl = http://localhost:7092
+
+### Authenticate the user
+POST {{baseUrl}}/api/v1/sapphire/auth/public/authenticate
+Content-Type: application/json
+
+{
+  "username":"john",
+  "password": "password"
+}
+
+###
