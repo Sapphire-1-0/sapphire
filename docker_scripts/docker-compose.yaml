@@ -58,30 +58,30 @@ services:
       retries: 5
       start_period: 30s
       timeout: 5s
-#  auth-service:
-#    build:
-#      context: ../services/auth-service
-#    image: vbalaji215/sapphire/auth-service:latest
-#    container_name: auth-service
-#    ports:
-#      - "7093:7093"  # updated port
-#    env_file:
-#      - auth-service.env
-#    depends_on:
-#      config-server:
-#        condition: service_healthy
-#      discovery-server:
-#        condition: service_healthy
-#      api-gateway:
-#        condition: service_healthy
-#    networks:
-#      - sapphire-net
-#    healthcheck:
-#      test: [ "CMD", "curl", "-f", "http://localhost:7093/actuator/health" ]
-#      interval: 10s
-#      retries: 5
-#      start_period: 30s
-#      timeout: 5s
+  auth-service:
+    build:
+      context: ../services/auth-service
+    image: vbalaji215/sapphire/auth-service:latest
+    container_name: auth-service
+    ports:
+      - "7093:7093"  # updated port
+    env_file:
+      - auth-service.env
+    depends_on:
+      config-server:
+        condition: service_healthy
+      discovery-server:
+        condition: service_healthy
+      api-gateway:
+        condition: service_healthy
+    networks:
+      - sapphire-net
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:7093/actuator/health" ]
+      interval: 10s
+      retries: 5
+      start_period: 30s
+      timeout: 5s
 networks:
   sapphire-net:
     external: true
