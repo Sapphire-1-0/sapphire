@@ -13,6 +13,7 @@
         <option value="$PROJECT_DIR$/services/auth-service/pom.xml" />
         <option value="$PROJECT_DIR$/services/brihaspathee-unit-test/pom.xml" />
         <option value="$PROJECT_DIR$/services/account-management/pom.xml" />
+        <option value="$PROJECT_DIR$/services/provider-management/pom.xml" />
       </list>
     </option>
   </component>
