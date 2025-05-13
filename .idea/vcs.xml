@@ -10,6 +10,7 @@
     <mapping directory="$PROJECT_DIR$/services/discovery-server" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/services/member-management" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/services/premium-billing" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/services/provider-management" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/services/sapphire-library" vcs="Git" />
   </component>
 </project>

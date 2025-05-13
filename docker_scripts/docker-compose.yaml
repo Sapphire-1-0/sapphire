@@ -2,7 +2,7 @@ services:
   config-server:
     build:
       context: ../services/config-server
-    image: vbalaji215/sapphire/config-server:latest
+    image: sapphire/config-server:latest
     container_name: config-server
     ports:
       - "7090:7090"
@@ -19,7 +19,7 @@ services:
   discovery-server:
     build:
       context: ../services/discovery-server
-    image: vbalaji215/sapphire/discovery-server:latest
+    image: sapphire/discovery-server:latest
     container_name: discovery-server
     ports:
       - "7091:7091"  # updated port
@@ -39,7 +39,7 @@ services:
   api-gateway:
     build:
       context: ../services/api-gateway
-    image: vbalaji215/sapphire/api-gateway:latest
+    image: sapphire/api-gateway:latest
     container_name: api-gateway
     ports:
       - "7092:7092"  # updated port
@@ -61,7 +61,7 @@ services:
   auth-service:
     build:
       context: ../services/auth-service
-    image: vbalaji215/sapphire/auth-service:latest
+    image: sapphire/auth-service:latest
     container_name: auth-service
     ports:
       - "7093:7093"  # updated port
@@ -78,6 +78,32 @@ services:
       - sapphire-net
     healthcheck:
       test: [ "CMD", "curl", "-f", "http://localhost:7093/actuator/health" ]
+      interval: 10s
+      retries: 5
+      start_period: 30s
+      timeout: 5s
+  provider-management:
+    build:
+      context: ../services/provider-management
+    image: sapphire/provider-management:latest
+    container_name: provider-management
+    ports:
+      - "7094:7094"  # updated port
+    env_file:
+      - provider-management.env
+    depends_on:
+      config-server:
+        condition: service_healthy
+      discovery-server:
+        condition: service_healthy
+      api-gateway:
+        condition: service_healthy
+      auth-service:
+        condition: service_healthy
+    networks:
+      - sapphire-net
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:7094/actuator/health" ]
       interval: 10s
       retries: 5
       start_period: 30s

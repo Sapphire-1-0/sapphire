@@ -1,0 +1,33 @@
+# Base URL for patient API
+@baseUrl = http://localhost:7092
+
+### Step 1: Get Auth Token
+POST {{baseUrl}}/api/v1/sapphire/auth/public/authenticate
+Content-Type: application/json
+
+{
+  "username":"john",
+  "password": "password"
+}
+
+> {%
+    const token = response.body.response.accessToken;
+    client.global.set("accessToken", token);
+    console.log("Access token set:", token);
+%}
+
+### Step 2: Create an organization
+POST {{baseUrl}}/api/v1/sapphire/provider/private/create-org
+Authorization: Bearer {{accessToken}}
+Content-Type: application/json
+
+{
+  "organizationName": "Test"
+}
+
+> {%
+    const apiResponse = response.body;
+    console.log("API Response:", apiResponse);
+%}
+
+###
