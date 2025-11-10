@@ -1,0 +1,32 @@
+@baseUrl = http://localhost:7094
+
+### Request 1
+POST {{baseUrl}}/api/v1/sapphire/organization/private/_search
+Content-Type: application/json
+
+{
+  "PPG_ID": "MS0912",
+  "NPI": "235625546"
+}
+
+### Request 2
+POST {{baseUrl}}/api/v1/sapphire/organization/private/_search
+Content-Type: application/json
+
+{
+  "TIN": "43-5343234",
+  "NPI": "235625547"
+}
+
+### Request 3
+POST {{baseUrl}}/api/v1/sapphire/organization/private/_search
+Content-Type: application/json
+
+{
+  "NPI": "1508867391",
+  "MEDICARE_ID": "220135"
+}
+
+
+
+
