@@ -1,0 +1,9 @@
+# Base URL for patient API
+@baseUrl = http://localhost:7094
+
+GET {{baseUrl}}/api/v1/sapphire/organization/4:5dc1643b-a5a0-4008-9fc0-d6d1a4016aad:39/network/4:5dc1643b-a5a0-4008-9fc0-d6d1a4016aad:6
+
+> {%
+    const apiResponse = response.body;
+    console.log("API Response:", apiResponse);
+%}
