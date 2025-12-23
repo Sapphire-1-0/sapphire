@@ -1,0 +1,11 @@
+# Base URL for patient API
+@baseUrl = http://localhost:7094
+
+GET {{baseUrl}}/api/v1/sapphire/organization/4:b8fc21aa-5d5b-415d-a0c3-caceb8dcd074:1364/
+    practitioner/4:b8fc21aa-5d5b-415d-a0c3-caceb8dcd074:76/
+    location/4:b8fc21aa-5d5b-415d-a0c3-caceb8dcd074:1386
+
+> {%
+    const apiResponse = response.body;
+    console.log("API Response:", apiResponse);
+%}
