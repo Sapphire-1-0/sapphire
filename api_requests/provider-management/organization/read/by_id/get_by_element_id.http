@@ -1,7 +1,34 @@
 # Base URL for patient API
 @baseUrl = http://localhost:7094
+# This org code is in the ATON database not in test database
+@orgCode = NETDJIC67S3K7UP
 
-GET {{baseUrl}}/api/v1/sapphire/organization/4:5dc1643b-a5a0-4008-9fc0-d6d1a4016aad:39
+### -------------------------------------------------------
+### 1. Get Organization by Code → extract elementId
+### -------------------------------------------------------
+
+GET {{baseUrl}}/api/v1/sapphire/organization/code/{{orgCode}}
+
+
+> {%
+    const body = response.body;
+
+    // Extract elementId from SapphireAPIResponse
+    const orgElementId = body.response.elementId;
+
+    if (!body.response || !body.response.elementId) {
+        throw new Error("Organization elementId not found in response");
+    }
+
+    client.global.set("orgElementId", orgElementId);
+
+    console.log("Organization elementId saved:", orgElementId);
+%}
+
+### -------------------------------------------------------
+### 2. Use extracted elementId in Practitioner API
+### -------------------------------------------------------
+GET {{baseUrl}}/api/v1/sapphire/organization/{{orgElementId}}
 
 > {%
     const apiResponse = response.body;
