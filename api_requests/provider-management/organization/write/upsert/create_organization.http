@@ -1,0 +1,107 @@
+# Base URL for patient API
+@baseUrl = http://localhost:7094
+
+POST {{baseUrl}}/api/v1/sapphire/organization/_upsert
+Content-Type: application/json
+Accept: application/json
+
+{
+  "name": "Test-Org",
+  "type": "HOSP",
+  "aliasName": "Test-Org-Alias",
+  "description": "Test-Org-Description",
+  "identifiers": [
+    {
+      "type": "NPI",
+      "value": "562623632"
+    },
+    {
+      "type": "MEDICARE_ID",
+      "value": "24F5225S43"
+    },
+    {
+      "type": "MEDICAID_ID",
+      "value": "FL7352S452",
+      "startDate": "2015-01-01",
+      "state":"FL"
+    }
+  ],
+  "contacts": [
+    {
+      "use": "DIR",
+      "address": {
+        "streetAddress": "123 Main St",
+        "secondaryAddress": "Suite 1",
+        "city": "Anytown",
+        "state": "CA",
+        "zipCode": "12345",
+        "county": "Anytown-Test",
+        "countyFIPS": "12345"
+      },
+      "telecom": {
+        "phone": "833-523-2352",
+        "tty": "234-734-6342",
+        "fax": "523-626-6236",
+        "afterHoursNumber": "722-722-7423",
+        "email": "vbalaji215@gmail.com",
+        "secureEmail": "vbalaji2.secure.15@gmail.com",
+        "website": "www.sapphirehealth.com"
+      },
+      "person": {
+        "firstName": "Johnny",
+        "lastName": "Doe",
+        "middleName": "J",
+        "title": "Mr."
+      }
+    }
+  ],
+
+  "networks": [
+    {
+      "elementId": "4:584fe225-8704-4f61-b2b6-1cce33b0b662:3046",
+      "locations": [
+        {
+          "elementId": "4:584fe225-8704-4f61-b2b6-1cce33b0b662:12303",
+          "locationNetwork": {
+            "spans": [
+              {
+                "startDate": "2020-01-01",
+                "endDate": "4000-01-01"
+              }
+            ]
+          }
+        },
+        {
+          "elementId": "4:584fe225-8704-4f61-b2b6-1cce33b0b662:12314",
+          "locationNetwork": {
+            "spans": [
+              {
+                "startDate": "2023-01-01",
+                "endDate": "4000-01-01"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}
+
+> {%
+    // ---- Status assertions ----
+    client.test("Status is 201 CREATED", function () {
+        client.assert(response.status === 201, "Expected HTTP 201");
+    });
+
+    // ---- Body parsing ----
+    const body = response.body;
+
+    client.test("Response has statusCode 201", function () {
+        client.assert(body.statusCode === 201, "statusCode should be 201");
+    });
+
+    client.test("Response contains organization code", function () {
+        client.assert(body.response !== null, "response should not be null");
+        client.assert(body.response.code !== null, "Organization code should be present");
+    });
+%}
